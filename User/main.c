@@ -2,35 +2,43 @@
 #include "Hcsr04.h"
 #include "OLED.h"
 #include "Delay.h"
-#include "TIM3.h"
 #include "USART.h"
 
 uint16_t Num,i,j;
-uint32_t x, Distance;
+uint32_t x1, x2, x3, x4;
 
 int main(void)
 {	
 	USART1_Config();
 	Hcsr04_Init();
+	OLED_Init();
 	printf("ok\n");
+	OLED_ShowString(1, 1, "Distance1:  . cm");
+	OLED_ShowString(2, 1, "Distance2:  . cm");
+	OLED_ShowString(3, 1, "Distance3:  . cm");
+	OLED_ShowString(4, 1, "Distance4:  . cm");
 	while(1)
 	{		
-	//		Num++;
-	//		OLED_ShowNum(4 , 14, Num ,3);
+//		Num++;
+//		OLED_ShowNum(4 , 14, Num ,3);
 		
-//		GPIO_SetBits(HCSR04_GPIO, HCSR04_TRIG);
-//		Delay_us(15);
-//		GPIO_ResetBits(HCSR04_GPIO, HCSR04_TRIG);
-//		if (Count != 0 && Up_Down_Flag==0)
-//		{
-//			x = T4Count[0] * 65536;
-//			x += Count;
-//			x = x*170/1000;	//µ¥Î»mm
-//			printf("Distance:%d\n", x);
-//			Count = 0;
-//		}
-		Delay_ms(500);	
-		Hcsr04_GetDistance();	
+		x1 = Hcsr04_GetDistance1();
+		Delay_ms(100);
+		x2 = Hcsr04_GetDistance2();
+		Delay_ms(100);
+		x3 = Hcsr04_GetDistance3();
+		Delay_ms(100);
+		x4 = Hcsr04_GetDistance4();
+		OLED_ShowNum(1 , 11, x1/10 ,2);
+		OLED_ShowNum(2 , 11, x2/10 ,2);
+		OLED_ShowNum(3 , 11, x3/10 ,2);
+		OLED_ShowNum(4 , 11, x4/10 ,2);
+		OLED_ShowNum(1 , 14, x1%10 ,1);
+		OLED_ShowNum(2 , 14, x2%10 ,1);
+		OLED_ShowNum(3 , 14, x3%10 ,1);
+		OLED_ShowNum(4 , 14, x4%10 ,1);
+		
+		Delay_ms(100);
+		
 	}
 }
-

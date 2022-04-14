@@ -671,16 +671,6 @@
               <FilePath>.\System\TIM4.h</FilePath>
             </File>
             <File>
-              <FileName>TIM3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\System\TIM3.c</FilePath>
-            </File>
-            <File>
-              <FileName>TIM3.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\System\TIM3.h</FilePath>
-            </File>
-            <File>
               <FileName>USART.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\System\USART.c</FilePath>

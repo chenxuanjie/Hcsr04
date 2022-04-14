@@ -15,11 +15,17 @@ void TIM4_Init(void)
 	
 	//输入捕获
 	TIM_ICInitTypeDef TIM_ICInitStructure;
-	TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;
+	TIM_ICInitStructure.TIM_Channel = TIM_Channel_1;	//通道1
 	TIM_ICInitStructure.TIM_ICFilter = 0;
 	TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
 	TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
 	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
+	TIM_ICInit(TIM4, &TIM_ICInitStructure);
+	TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;	//通道2
+	TIM_ICInit(TIM4, &TIM_ICInitStructure);
+	TIM_ICInitStructure.TIM_Channel = TIM_Channel_3;	//通道3
+	TIM_ICInit(TIM4, &TIM_ICInitStructure);
+	TIM_ICInitStructure.TIM_Channel = TIM_Channel_4;	//通道4
 	TIM_ICInit(TIM4, &TIM_ICInitStructure);
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -29,8 +35,8 @@ void TIM4_Init(void)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
-	TIM_ClearFlag(TIM4, TIM_IT_CC1 | TIM_FLAG_Update);
-	TIM_ITConfig(TIM4, TIM_IT_CC1 | TIM_FLAG_Update, ENABLE);
+	TIM_ClearFlag(TIM4, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4 | TIM_FLAG_Update);
+	TIM_ITConfig(TIM4, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4 | TIM_FLAG_Update, ENABLE);
 	
 	TIM_Cmd(TIM4, ENABLE);
 }
